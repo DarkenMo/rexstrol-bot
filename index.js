@@ -74,18 +74,7 @@ fs.readdir("./commands/modaration", (err, files) => {
     console.log(client.commands)
   });
 });
-fs.readdir("./commands/nsfw", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    let props = require(`./commands/nsfw/${file}`);
 
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    client.commands.set(commandName, props);
-    console.log(client.commands)
-  });
-});
 fs.readdir("./commands/utils", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
@@ -99,104 +88,6 @@ fs.readdir("./commands/utils", (err, files) => {
   });
 });
 
-
-// logger: logs every action that a user does in a channel named "logs" the rest of the code is in event/message...
-client.on("messageUpdate", async (oldMessage, newMessage) => {
-  require("./events/messageUpdate")(oldMessage, newMessage);
-});
-client.on("messageDelete", async (message) => {
-  require("./events/messageDelete")(message);
-});
-client.on("channelCreate", function (channel) {
-  let message = channel.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`New Channel Or Category Created`)
-    .setColor("GREEN")
-    .setDescription(`A New Channel Has Been Born: ${channel}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("channelDelete", function (channel) {
-  let message = channel.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Channel Deleted`)
-    .setColor("RED")
-    .setDescription(`A Channel Has Been Terminated: ${channel.name}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("channelUpdate", function (channel, oldChannel) {
-  let message = channel.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Channel Updated`)
-    .setColor("ORANGE")
-    .setDescription(`A Channel Has Been Updated: \nOld Name: ${channel} Old Topic: ${channel.topic}\nNew Name: ${oldChannel} New Topic: ${oldChannel.topic}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("emojiCreate", function (emoji) {
-  let message = emoji.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Emoji Created`)
-    .setColor("GREEN")
-    .setDescription(`A New Emoji Has Been Born: \nEmoji: ${emoji}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("emojiUpdate", function (oldEmoji, newEmoji) {
-  let message = oldEmoji.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Emoji Updated`)
-    .setColor("ORANGE")
-    .setDescription(`A Emoji Has Been Tweaked: \nEmoji: ${oldEmoji.name} \nNew Emoji: ${newEmoji.name} ${newEmoji}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("emojiDelete", function (emoji) {
-  let message = emoji.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Emoji Deleted`)
-    .setColor("RED")
-    .setDescription(`A Emoji Has Been Terminated: \nEmoji: ${emoji}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("roleCreate", function (role) {
-  let message = role.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`New Role`)
-    .setColor("GREEN")
-    .setDescription(`A New Role Has Been Birthed: \nRole: ${role}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("roleUpdate", function (oldRole, newRole) {
-  let message = oldRole.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Role Updated`)
-    .setColor("ORANGE")
-    .setDescription(`A Role Has Been Updated: \nOld Role: ${oldRole.name} \nNew Role ${newRole}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
-client.on("roleDelete", function (role) {
-  let message = role.guild.channels.cache.find(
-    (ch) => ch.name === "logs"
-  );
-  let embed = new Discord.MessageEmbed()
-    .setTitle(`Role Deleted`)
-    .setColor("RED")
-    .setDescription(`A Role Has Been Terminated: \nRole: ${role.name}`).setTimestamp()
-  message.send({ embeds: [embed] })
-});
 //=====================================================\\
 
 //======================================================\\
