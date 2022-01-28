@@ -31,7 +31,7 @@ make sure to put your token and prefix into the config.json file and customize t
 - i have provided the docker file and the dockerignorefile in the source.
 - you gotta know how to use docker.
 - you just keep the files in your code.
-- do `docker build -t username/projectname:1.0` in your terminal to build your project.
+- do `docker build -t username/projectname:1.0 .` in your terminal to build your project.
 - after doing the previous step a docker image must be created in your docker desktop app.
 - run the image and turn it into a container and boom now your discord bot is on docker.
 
