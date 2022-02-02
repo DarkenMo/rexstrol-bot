@@ -27,7 +27,7 @@ make sure to put your token and prefix into the config.json file and customize t
 - d.ping - sends the ping of the bot to the discoord servers.
 - d.eval - for developers: used to test raw code for the chat in discord.
 
-# how to use the bot on docker:
+# how to Dockerize the bot:
 - i have provided the docker file and the dockerignorefile in the source.
 - you gotta know how to use docker.
 - you just keep the files in your code.
